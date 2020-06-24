@@ -8,9 +8,9 @@ import ShapeTypes from '@logic/shapeTypes';
 import shapeTypes from "../logic/shapeTypes";
 
 export default class App extends AbstractModel {
-  _state: any;
+  _state: any
   readonly size: number
-  private animationCount: 0;
+  private animationCount: number
 
   constructor(
     canvas: HTMLCanvasElement,
@@ -33,8 +33,9 @@ export default class App extends AbstractModel {
       },
       gravity: 2,
       intensity: 10,
-      animationCount: 0
     };
+
+    this.animationCount = 0;
   }
 
   private setEvents = (): void => {
