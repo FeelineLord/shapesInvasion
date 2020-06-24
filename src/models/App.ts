@@ -10,6 +10,7 @@ import shapeTypes from "../logic/shapeTypes";
 export default class App extends AbstractModel {
   _state: any;
   readonly size: number
+  private animationCount: 0;
 
   constructor(
     canvas: HTMLCanvasElement,
@@ -31,7 +32,8 @@ export default class App extends AbstractModel {
         cloud: []
       },
       gravity: 2,
-      intensity: 10
+      intensity: 10,
+      animationCount: 0
     };
   }
 
@@ -162,13 +164,9 @@ export default class App extends AbstractModel {
   };
 
   private shapesInterval = (): void => {
-    this.makeShape();
-
-    setInterval(() => {
-      for (let i = 0; i < this.state.intensity; i++) {
-        this.makeShape()
-      }
-    }, 1000);
+    for (let i = 0; i < this.state.intensity; i++) {
+      this.makeShape();
+    }
   }
 
   private renderShapes = (): void => {
@@ -282,9 +280,20 @@ export default class App extends AbstractModel {
 
   private render = (): void => {
     window.requestAnimationFrame(() => {
+      if (
+        this.animationCount < 60
+      ) {
+        this.animationCount++
+      } else {
+        console.log(this.animationCount);
+        this.shapesInterval();
+        this.animationCount = 0;
+      }
+
       this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
       this.renderShapes();
       this.render();
+
     });
   };
 }
