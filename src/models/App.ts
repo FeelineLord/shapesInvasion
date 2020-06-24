@@ -51,7 +51,7 @@ export default class App extends AbstractModel {
 
       if (
         positive &&
-        prev >= 100
+        prev >= 60
       ) {
         return;
       } else if (
@@ -59,12 +59,6 @@ export default class App extends AbstractModel {
         prev <= 1
       ) {
         return;
-      } else if (
-        param === 'gravity' &&
-        positive &&
-        prev >= 30
-      ) {
-        return ;
       }
 
       this.setState({
