@@ -59,6 +59,12 @@ export default class App extends AbstractModel {
         prev <= 1
       ) {
         return;
+      } else if (
+        param === 'gravity' &&
+        positive &&
+        prev >= 30
+      ) {
+        return ;
       }
 
       this.setState({
@@ -114,7 +120,6 @@ export default class App extends AbstractModel {
 
   public init = (): void => {
     this.setEvents();
-    this.shapesInterval();
     this.render();
   };
 
@@ -163,12 +168,6 @@ export default class App extends AbstractModel {
       this.updateUi();
     });
   };
-
-  private shapesInterval = (): void => {
-    for (let i = 0; i < this.state.intensity; i++) {
-      this.makeShape();
-    }
-  }
 
   private renderShapes = (): void => {
     const {
@@ -282,19 +281,17 @@ export default class App extends AbstractModel {
   private render = (): void => {
     window.requestAnimationFrame(() => {
       if (
-        this.animationCount < 60
+        this.animationCount < 60 / this.state.intensity
       ) {
         this.animationCount++
       } else {
-        console.log(this.animationCount);
-        this.shapesInterval();
+        this.makeShape();
         this.animationCount = 0;
       }
 
       this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
       this.renderShapes();
       this.render();
-
     });
   };
 }
