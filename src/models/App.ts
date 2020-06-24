@@ -11,6 +11,7 @@ export default class App extends AbstractModel {
   _state: any
   readonly size: number
   private animationCount: number
+  private animationAccumulator: number
 
   constructor(
     canvas: HTMLCanvasElement,
@@ -36,6 +37,7 @@ export default class App extends AbstractModel {
     };
 
     this.animationCount = 0;
+    this.animationAccumulator = 0;
   }
 
   private setEvents = (): void => {
@@ -275,12 +277,12 @@ export default class App extends AbstractModel {
   private render = (): void => {
     window.requestAnimationFrame(() => {
       if (
-        this.animationCount < 60 / this.state.intensity
+        this.animationCount < (60 / this.state.intensity)
       ) {
-        this.animationCount++
+        this.animationCount += 1
       } else {
         this.makeShape();
-        this.animationCount = 0;
+        this.animationCount -= 60 / this.state.intensity;
       }
 
       this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
