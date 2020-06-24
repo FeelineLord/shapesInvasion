@@ -1,0 +1,41 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "tsconfig.json",
+    "createDefaultProgram": true,
+    "tsconfigRootDir": "."
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "extends": [
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    "ban-ts-ignore": "off",
+    "constructor-super": "off",
+    "getter-return": "off",
+    "no-const-assign": "off",
+    "no-dupe-args": "off",
+    "no-dupe-class-members": "off",
+    "no-dupe-keys": "off",
+    "no-func-assign": "off",
+    "no-import-assign": "off",
+    "no-new-symbol": "off",
+    "no-obj-calls": "off",
+    "no-redeclare": "off",
+    "no-setter-return": "off",
+    "no-this-before-super": "off",
+    "no-undef": "off",
+    "no-unreachable": "off",
+    "no-unsafe-negation": "off",
+    "no-var": "warn",
+    "prefer-const": "warn",
+    "prefer-rest-params": "warn",
+    "prefer-spread": "warn",
+    "valid-typeof": "off",
+    "no-var-requires": "off"
+  }
+}
